@@ -1,0 +1,106 @@
+package org.octoprint.api.model;
+
+import java.io.IOException;
+import java.io.Writer;
+
+//import org.json.simple.JsonObject;
+//import org.json.simple.Jsonable;
+import com.github.cliftonlabs.json_simple.JsonKey;
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsonable;
+import org.octoprint.api.util.JSONLoader;
+
+
+/**
+ * Temperature information as provided by an extruder or the print bed http://docs.octoprint.org/en/master/api/datamodel.html#sec-api-datamodel-printer-tempdata
+ * @author rweber
+ */
+public final class TemperatureInfo implements Jsonable, JSONLoader{
+	private String m_name = null;
+	private JsonObject m_data = null;
+	
+	public TemperatureInfo() {
+		m_data = new JsonObject();
+		m_name = "Printer Device";
+	}
+
+	/**
+	 * @return the name of tool (Extruder, Print Bed, etc)
+	 */
+	public String getName(){
+		return m_name;
+	}
+	
+	public void setName(String n){
+		m_name = n;
+	}
+	
+	/**
+	 * @return the actual Temp of the tool in degrees celsius
+	 */
+	public Double getActualTemp(){
+		return m_data.getDouble(new JsonKey() {
+			@Override
+			public String getKey() { return "actual"; }
+
+			@Override
+			public Object getValue() {
+				return false;
+			}
+		});
+	}
+	
+	/**
+	 * @return the target temp in degrees celsius, returns -1 if no target is set
+	 */
+	public Double getTargetTemp(){
+		Double result = new Double(-1);	//-1 if no target is set
+		
+		//can't use contains here, the value may exist and just be null
+		if(m_data.get("target") != null)
+		{
+			result = m_data.getDouble(new JsonKey() {
+				@Override
+				public String getKey() { return "target"; }
+
+				@Override
+				public Object getValue() {
+					return false;
+				}
+			});
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * @return the offset, 0 if none
+	 */
+	public Long getOffset(){
+		return m_data.getLong(new JsonKey() {
+			@Override
+			public String getKey() { return "offset"; }
+
+			@Override
+			public Object getValue() {
+				return false;
+			}
+		});
+	}
+	
+	@Override
+	public void loadJSON(JsonObject json) {
+		m_data = json;
+	}
+
+	@Override
+	public String toJson() {
+		return m_data.toJson();
+	}
+
+	@Override
+	public void toJson(Writer arg0) throws IOException {
+		arg0.write(this.toJson());
+	}
+
+}
