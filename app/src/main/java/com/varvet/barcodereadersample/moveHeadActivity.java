@@ -17,15 +17,17 @@ import org.octoprint.api.model.Axis;
 
 public class moveHeadActivity extends AppCompatActivity {
 
-
+    static Recognizer voice = Recognizer.getInstance();
     public String x_axis;
     public String y_axis;
     public String z_axis;
 
     protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.move_head_activity);
 
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.move_head_activity);
+        Listening();
 
         ImageButton back = (ImageButton) findViewById(R.id.backHeadArrow);
         ImageButton front = (ImageButton) findViewById(R.id.frontHeadArrow);
@@ -43,6 +45,7 @@ public class moveHeadActivity extends AppCompatActivity {
         final String x_axis = X.getText().toString();
         final String y_axis = Y.getText().toString();
         final String z_axis = Z.getText().toString();
+
 
 //        X.addTextChangedListener(connTextWatcher);
 //        Y.addTextChangedListener(connTextWatcher);
@@ -124,6 +127,9 @@ public class moveHeadActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void Listening() {
+        voice.initializeSpeech(this);
+    }
 
 
     public TextWatcher connTextWatcher = new TextWatcher() {
