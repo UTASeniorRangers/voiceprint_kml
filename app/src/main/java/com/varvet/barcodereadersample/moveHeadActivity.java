@@ -17,7 +17,7 @@ import org.octoprint.api.model.Axis;
 
 public class moveHeadActivity extends AppCompatActivity {
 
-    static Recognizer voice = Recognizer.getInstance();
+    Recognizer voice = Recognizer.getInstance();
     public String x_axis;
     public String y_axis;
     public String z_axis;
@@ -57,6 +57,7 @@ public class moveHeadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 printer.moveOnAxis(Axis.getAxis("y"),Double.parseDouble(y_axis));
+
             }
         });
 
