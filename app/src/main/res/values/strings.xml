@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">voice_VoicePrint</string>
+
+    <!-- Strings related to MainActivity-->
+    <string name="scan_barcode_button">QR Scanner</string>
+    <string name="no_barcode_captured">No barcode captured</string>
+    <string name="barcode_error_format">"Error reading barcode: %1$s"</string>
+    <string name="nextBTN">NEXT</string>
+    <string name="backBTN">BACK</string>
+
+    <!-- Dialog related -->
+    <string name="OK"> <b>OK</b> </string>
+    <string name="CANCEL"> Cancel </string>
+    <string name="dummy">        </string>
+    <string name="RETRY"> <b>Retry</b> </string>
+    <string name="dialog_message"> <b color="#008000">Connected</b>! \n\n\t\t\t press OK to go to the next page. </string>
+    <string name="dialog_message1"> <b color="#FF0000"> Not Connected</b>! \n\n\t\t\t check the IP address \n\t\t\t and save it
+        \n\n\t\t\t please try again! </string>
+    <string name="dialog_title"> Status \n </string>
+
+    <!--VoicePrint Overview Paragraph-->
+    <string name="overview_paragraph">
+        VoicePrint is an Android application that allows a user to control a 3D printer using voice commands.
+        This app will use Android voice recognition for voice transcription.
+        It will also store and retrieve STL files (models of 3D objects) to and from Google Cloud Storage.
+        Finally, it will send commands to the OctoPrint API, and OctoPrint will control a 3D printer while it creates an object.\n\n
+        \t\t\t To use VoicePrint, a user must have a 3D printer with a connected OctoPi device running OctoPrint.
+        OctoPi is a Raspberry Pi image, and OctoPrint is a program that runs on it. OctoPrint provides both
+        web and API access to the 3D printer. VoicePrint will access the Android device′s microphone, and
+        the app will use it to record voice com- mands. VoicePrint will convert these commands into text using
+        the Android operating system′s built-in voice recognition system.
+    </string>
+    <string name="textview_scan_api"><p>\t tap "QR SCANNER" to scan QR code.\n
+        (<b>Hint</b>: Go to OctoPrint -> click setting icon -> click API) </p> </string>
+    <string name="textview_ip"><p>\t enter the IP address below that OctoPrint is assigned.\n
+        (<b>Hint</b>: see in URL bar of OctoPrint)</p></string>
+
+
+
+    <!-- Strings related to barcode scanner -->
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="ip_address">IP address</string>
+    <string name="save_key">Save API Key</string>
+    <string name="save_ip">Save IP</string>
+    <string name="connect">CONNECT</string>
+</resources>
