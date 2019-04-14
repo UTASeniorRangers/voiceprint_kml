@@ -42,9 +42,9 @@ public class moveHeadActivity extends AppCompatActivity {
         TextView Y = findViewById(R.id.y_axis);
         TextView Z = findViewById(R.id.z_axis);
 
-        final String x_axis = X.getText().toString();
-        final String y_axis = Y.getText().toString();
-        final String z_axis = Z.getText().toString();
+        x_axis = X.getText().toString();
+        y_axis = Y.getText().toString();
+        z_axis = Z.getText().toString();
 
 
 //        X.addTextChangedListener(connTextWatcher);
@@ -85,14 +85,14 @@ public class moveHeadActivity extends AppCompatActivity {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                printer.moveOnAxis(Axis.getAxis("z"),-Double.parseDouble(z_axis));
+                printer.moveOnAxis(Axis.getAxis("z"),Double.parseDouble(z_axis));
             }
         });
 
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                printer.moveOnAxis(Axis.getAxis("z"),Double.parseDouble(z_axis));
+                printer.moveOnAxis(Axis.getAxis("z"),-Double.parseDouble(z_axis));
             }
         });
 
@@ -120,6 +120,7 @@ public class moveHeadActivity extends AppCompatActivity {
 
     public void ReverseButton(MenuItem item) {
         Intent intent = new Intent(moveHeadActivity.this,selectFileActivity.class);
+        voice.kill();
         startActivity(intent);
     }
 
