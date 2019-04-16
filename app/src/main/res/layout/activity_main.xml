@@ -9,15 +9,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="359dp"
-        android:layout_height="50dp"
+        android:layout_width="382dp"
+        android:layout_height="63dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/textview_scan_api"
         android:textAlignment="textStart"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/common_google_signin_btn_text_light"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="8dp"
         android:autoLink="all"
         android:freezesText="true"
         android:gravity="center"
@@ -56,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.273" />
+        app:layout_constraintVertical_bias="0.302" />
 
     <RadioButton
         android:id="@+id/saveButton"
@@ -73,25 +74,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_textview"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="46dp"
+        android:layout_width="371dp"
+        android:layout_height="65dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/textview_ip"
         android:textAlignment="textStart"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/common_google_signin_btn_text_light"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/IP_input_layout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveButton"
-        app:layout_constraintVertical_bias="0.924" />
+        app:layout_constraintVertical_bias="0.959" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/IP_input_layout"
@@ -106,15 +109,15 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveButton"
-        app:layout_constraintVertical_bias="0.321">
+        app:layout_constraintVertical_bias="0.345">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/IP_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="@string/ip_address" />
-            <!--android:inputType="number|numberDecimal" -->
+            android:hint="@string/ip_address"
+            android:inputType="text" />
+        <!--android:inputType="number|numberDecimal" -->
         <!--android:focusableInTouchMode="true"/>-->
 
     </android.support.design.widget.TextInputLayout>
@@ -157,7 +160,7 @@
         app:layout_constraintHorizontal_bias="0.209"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveIPButton1"
-        app:layout_constraintVertical_bias="0.206" />
+        app:layout_constraintVertical_bias="0.233" />
 
     <Button
         android:id="@+id/resumeButton"
@@ -180,7 +183,7 @@
         app:layout_constraintHorizontal_bias="0.762"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveIPButton1"
-        app:layout_constraintVertical_bias="0.208" />
+        app:layout_constraintVertical_bias="0.232" />
 
 
 </android.support.constraint.ConstraintLayout>

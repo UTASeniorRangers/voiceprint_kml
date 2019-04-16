@@ -126,7 +126,6 @@ public class Recognizer implements RecognitionListener {
         Log.i(LOG_TAG, "onResults");
         ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-
         assert matches != null;
         text += matches.get(0);
         Toast.makeText(this.context,"text: "+text, Toast.LENGTH_SHORT).show();

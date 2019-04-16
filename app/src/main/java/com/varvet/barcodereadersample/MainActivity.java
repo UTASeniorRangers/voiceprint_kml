@@ -38,7 +38,6 @@ import java.net.MalformedURLException;
 import java.nio.file.InvalidPathException;
 
 
-// branch "voice" created off of master
 public class MainActivity extends AppCompatActivity {
 
     private static final int BARCODE_READER_REQUEST_CODE = 1;
@@ -48,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText IP_add = null;
     public static Button connBtn;
 
-    public static void setConnBtn(Button connBtn) {
-        connBtn.setClickable(false);
-    }
+//    public static void setConnBtn(Button connBtn) {
+//        connBtn.setClickable(false);
+//    }
 
     public Button resumeBtn;
     public static String savedAPI = null;
@@ -82,16 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
 //        connBtn.addTextChangedListener(connTextWatcher);
 
-//        if(IP == null && savedAPI == null)
-//        {
-//            resumeBtn.setClickable(false);
-//            //resumeBtn.setEnabled(false);
-//        }
-//        else
-//        {
-//            resumeBtn.setClickable(true);
-//            //resumeBtn.setEnabled(true);
-//        }
 
         resumeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     PrinterCommand printer = new PrinterCommand(octoPrint);
 
                     // getCurrentState should return "Operational" or "Closed" and isReady should return true
-                    System.out.println("printer current state is: ");
+                    System.out.println("printer current state: ");
 
                     boolean state1 = printer.getCurrentState().isPrinting();
                     boolean state2 = printer.getCurrentState().isReady();
@@ -127,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         connBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,10 +138,12 @@ public class MainActivity extends AppCompatActivity {
                         {
                             //printer.sendExtruderCommand(PrinterCommand.ToolCommand.TARGET_TEMP,0,80);
                             getDialog(R.string.dialog_title, R.string.dialog_message, R.string.CANCEL, R.string.OK);
+                            connBtn.setEnabled(false);
                             resumeBtn.setEnabled(true);
                         } else {
                             //when input (API or IP) are invalid, display alert
                             getDialog(R.string.dialog_title, R.string.dialog_message1, R.string.OK, R.string.dummy);
+                            connBtn.setEnabled(true);
                         }
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
@@ -162,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                connBtn.setEnabled(false);
+
             }
         });
 
@@ -191,8 +181,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         IP_add = findViewById(R.id.IP_input);
-
-        //TextWatcher is not working for saveIPButton
         IP_add.addTextChangedListener(connTextWatcher);
 
         saveIPButton.setOnClickListener(new View.OnClickListener() {
@@ -208,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
     @Override
@@ -297,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
     //Method used to get permission
     void doPermAudio()
     {
@@ -314,5 +302,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
 //-end-
 

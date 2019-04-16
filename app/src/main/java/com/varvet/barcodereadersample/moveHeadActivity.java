@@ -1,8 +1,10 @@
 package com.varvet.barcodereadersample;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,10 +25,9 @@ public class moveHeadActivity extends AppCompatActivity {
     public String z_axis;
 
     protected void onCreate(Bundle savedInstanceState){
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.move_head_activity);
+        setActionBar("Move Printer Arm");
         Listening();
 
         ImageButton back = (ImageButton) findViewById(R.id.backHeadArrow);
@@ -46,7 +47,6 @@ public class moveHeadActivity extends AppCompatActivity {
         y_axis = Y.getText().toString();
         z_axis = Z.getText().toString();
 
-
 //        X.addTextChangedListener(connTextWatcher);
 //        Y.addTextChangedListener(connTextWatcher);
 //        Z.addTextChangedListener(connTextWatcher);
@@ -57,7 +57,6 @@ public class moveHeadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 printer.moveOnAxis(Axis.getAxis("y"),Double.parseDouble(y_axis));
-
             }
         });
 
@@ -112,10 +111,21 @@ public class moveHeadActivity extends AppCompatActivity {
 
     }
 
+    public void setActionBar(String heading){
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+        actionBar.setTitle(heading);
+        actionBar.show();
+    }
 
     public void ForwardButton(MenuItem item) {
         Intent intent = new Intent(moveHeadActivity.this,moveHeadActivity.class);
         startActivity(intent);
+        voice.kill();
     }
 
     public void ReverseButton(MenuItem item) {
@@ -127,6 +137,7 @@ public class moveHeadActivity extends AppCompatActivity {
     public void HomeButton(MenuItem item) {
         Intent intent = new Intent(moveHeadActivity.this, homeActivity.class);
         startActivity(intent);
+        voice.kill();
     }
 
     public void Listening() {

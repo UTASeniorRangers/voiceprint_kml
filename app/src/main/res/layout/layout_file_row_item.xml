@@ -14,24 +14,26 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
+        android:background="@color/cardview_dark_background"
         android:layout_height="84dp">
 
         <TextView
             android:id="@+id/fileName"
-            android:layout_width="wrap_content"
+            android:layout_width="317dp"
             android:layout_height="53dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="61dp"
-            android:text="TextView"
-            android:textSize="20sp" />
+            android:layout_marginEnd="75dp"
+            android:text="FileName"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/fileSize"
-            android:layout_width="68dp"
+            android:layout_width="78dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -39,19 +41,21 @@
             android:layout_marginEnd="8dp"
             android:text="size:"
             android:textAlignment="textEnd"
+            android:textColor="@android:color/holo_orange_dark"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/fileUploaded"
-            android:layout_width="104dp"
+            android:layout_width="282dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="277dp"
+            android:layout_marginEnd="110dp"
             android:layout_marginBottom="4dp"
             android:text="Uploaded: "
+            android:textColor="@color/colorBackground"
             android:textSize="16sp" />
 
         <!--<TextView-->
