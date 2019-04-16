@@ -38,6 +38,7 @@ import java.net.MalformedURLException;
 import java.nio.file.InvalidPathException;
 
 
+// branch "voice" created off of master
 public class MainActivity extends AppCompatActivity {
 
     private static final int BARCODE_READER_REQUEST_CODE = 1;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     PrinterCommand printer = new PrinterCommand(octoPrint);
 
                     // getCurrentState should return "Operational" or "Closed" and isReady should return true
-                    System.out.println("printer current state: ");
+                    System.out.println("printer current state is: ");
 
                     boolean state1 = printer.getCurrentState().isPrinting();
                     boolean state2 = printer.getCurrentState().isReady();
