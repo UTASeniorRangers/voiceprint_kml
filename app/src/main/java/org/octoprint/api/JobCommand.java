@@ -36,6 +36,8 @@ public class JobCommand extends OctoPrintCommand {
 		return result;
 	}
 
+
+
 	/**
 	 * @return the details of the current job, return null if no job is loaded
 	 */

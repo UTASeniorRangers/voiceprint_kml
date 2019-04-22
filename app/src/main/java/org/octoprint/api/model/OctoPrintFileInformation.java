@@ -97,6 +97,36 @@ public abstract class OctoPrintFileInformation implements Jsonable, JSONLoader {
 
 
 
+//	public Long getGCODEAnalysis() {
+//
+//	    return m_data.getLong(new JsonKey() {
+//            @Override
+//            public String getKey() {
+//                return "gcodeAnalysis";
+//            }
+//            @Override
+//            public Object getValue() {
+//                return null;
+//            }
+//        });
+//    }
+
+    public Float getEstimatedPrintTime() {
+
+        return ((JsonObject)(m_data.get("gcodeAnalysis"))).getFloat(new JsonKey() {
+            @Override
+            public String getKey() {
+                return "estimatedPrintTime";
+            }
+            @Override
+            public Object getValue() {
+                return null;
+            }
+        });
+    }
+
+
+
 	@Override
 	public void loadJSON(JsonObject json) {
 		m_data = json;

@@ -28,14 +28,14 @@
 
     <Button
         android:id="@+id/printButton"
-        style="@android:style/Widget.Button.Toggle"
+        style="@android:style/Widget.DeviceDefault.Button"
         android:layout_width="126dp"
         android:layout_height="127dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="212dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/button_bg_round"
+        android:background="@drawable/button_bg_rounded_corners"
         android:padding="15dp"
         android:text="PRINT"
         android:textSize="24sp"
@@ -45,16 +45,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <Button
         android:id="@+id/pauseButton"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@android:style/Widget.DeviceDefault.Button"
         android:layout_width="101dp"
         android:layout_height="80dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="9dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="PAUSE"
         android:textAllCaps="false"
@@ -62,6 +61,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/resumeButton"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toEndOf="@+id/cancelButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.812" />
@@ -69,7 +69,7 @@
 
     <Button
         android:id="@+id/resumeButton"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@android:style/Widget.DeviceDefault.Button"
         android:layout_width="101dp"
         android:layout_height="80dp"
         android:layout_marginStart="292dp"
@@ -87,7 +87,7 @@
 
     <Button
         android:id="@+id/cancelButton"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@android:style/Widget.DeviceDefault.Button"
         android:layout_width="101dp"
         android:layout_height="80dp"
         android:layout_marginStart="60dp"
@@ -99,12 +99,36 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.812" />
 
+
+    <TextView
+        android:id="@+id/printTime"
+        android:layout_width="223dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:lineSpacingExtra="8sp"
+        android:text="Duration: 00.00"
+        android:textAlignment="center"
+        android:textColor="@color/colorBackground"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/printButton"
+        app:layout_constraintVertical_bias="0.087" />
+
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

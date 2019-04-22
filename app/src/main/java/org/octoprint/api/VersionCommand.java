@@ -8,7 +8,8 @@ import com.github.cliftonlabs.json_simple.JsonObject;
  * 
  * @author rweber
  */
-public class VersionCommand extends OctoPrintCommand{
+
+public class VersionCommand extends OctoPrintCommand {
 	
 	public VersionCommand(OctoPrintInstance requestor) {
 		super(requestor,"version");
@@ -18,7 +19,7 @@ public class VersionCommand extends OctoPrintCommand{
 	/**
 	 * @return the api version
 	 */
-	public String getAPIVersion(){
+	public String getAPIVersion() {
 		String result = null;
 		
 		JsonObject json = g_comm.executeQuery(this.createRequest());
@@ -34,7 +35,7 @@ public class VersionCommand extends OctoPrintCommand{
 	/**
 	 * @return the server version
 	 */
-	public String getServerVersion(){
+	public String getServerVersion() {
 		String result = null;
 		
 		JsonObject json = g_comm.executeQuery(this.createRequest());

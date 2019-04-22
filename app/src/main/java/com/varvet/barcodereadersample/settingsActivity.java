@@ -71,7 +71,7 @@ public class settingsActivity extends AppCompatActivity {
     }
 
     public void ForwardButton(MenuItem item) {
-        Intent intent = new Intent(settingsActivity.this,selectFileActivity.class);
+        Intent intent = new Intent(settingsActivity.this,fileChooserActivity.class);
         startActivity(intent);
     }
 

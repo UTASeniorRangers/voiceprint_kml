@@ -47,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText IP_add = null;
     public static Button connBtn;
 
-//    public static void setConnBtn(Button connBtn) {
-//        connBtn.setClickable(false);
-//    }
 
     public Button resumeBtn;
     public static String savedAPI = null;

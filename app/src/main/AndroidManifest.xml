@@ -32,6 +32,8 @@
         <activity android:name=".selectFileActivity"/>
         <activity android:name=".moveHeadActivity"/>
         <activity android:name=".printActivity"/>
+        <activity android:name=".fileChooserActivity"/>
+        <activity android:name=".firebaseActivity"/>
 
         <activity
             android:name=".barcode.BarcodeCaptureActivity"

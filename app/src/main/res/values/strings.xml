@@ -48,4 +48,15 @@
     <string name="save_key">Save API Key</string>
     <string name="save_ip">Save IP</string>
     <string name="connect">CONNECT</string>
+    <string name="List">
+        <br>List of .GCODE Files: \n\n
+            Please type the number # to download the file.\n\n
+
+            #0. Hi\n\n#1. Hello\n\n
+
+        </br>
+
+    </string>
+
+
 </resources>

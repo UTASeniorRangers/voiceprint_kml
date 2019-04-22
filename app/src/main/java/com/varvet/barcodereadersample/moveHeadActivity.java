@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.octoprint.api.PrinterCommand;
 import org.octoprint.api.model.Axis;
 
@@ -123,13 +125,13 @@ public class moveHeadActivity extends AppCompatActivity {
     }
 
     public void ForwardButton(MenuItem item) {
-        Intent intent = new Intent(moveHeadActivity.this,moveHeadActivity.class);
-        startActivity(intent);
-        voice.kill();
+//        Intent intent = new Intent(moveHeadActivity.this,moveHeadActivity.class);
+//        startActivity(intent);
+        Toast.makeText(moveHeadActivity.this, "Only Go Back", Toast.LENGTH_SHORT).show();
     }
 
     public void ReverseButton(MenuItem item) {
-        Intent intent = new Intent(moveHeadActivity.this,selectFileActivity.class);
+        Intent intent = new Intent(moveHeadActivity.this,fileChooserActivity.class);
         voice.kill();
         startActivity(intent);
     }

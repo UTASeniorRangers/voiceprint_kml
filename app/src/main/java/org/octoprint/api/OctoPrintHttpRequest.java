@@ -67,7 +67,7 @@ public class OctoPrintHttpRequest {
 			connection.setRequestProperty("Content-Type","application/json");
 			connection.setRequestMethod(this.getType());
 
-			if(this.getType().toString().equals("GET")){
+			if(this.getType().equals("GET")){
 				connection.setDoInput(true);
 			}
 			else{

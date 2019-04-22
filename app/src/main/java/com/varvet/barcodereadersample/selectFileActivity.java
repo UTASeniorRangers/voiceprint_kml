@@ -32,6 +32,7 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
 
     public static final String EXTRA_FILE_NAME = "fileName";
     public static final String EXTRA_POSITION = "filePosition";
+    public static final String EXTRA_PRINTTIME = "printTime";
 
     public RecyclerView recyclerView;
     ListAdapterWithRecyclerView listAdapterWithRecyclerView;
@@ -54,6 +55,16 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
         recyclerView.setAdapter(listAdapterWithRecyclerView);
 
         listAdapterWithRecyclerView.setOnItemClickListener(selectFileActivity.this);
+
+
+//        listAdapterWithRecyclerView.setOnItemClickListener(new ListAdapterWithRecyclerView.OnItemClickListener() {
+//            @Override
+//            public void OnItemClick(int position) {
+//
+//            }
+//        });
+
+
 //
 //        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 //        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -71,9 +82,11 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
         Intent intent = new Intent(selectFileActivity.this, printActivity.class);
         intent.putExtra(EXTRA_FILE_NAME, allFiles.listFiles().get(position).getName());
         intent.putExtra(EXTRA_POSITION, position);
-        //System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
+        intent.putExtra(EXTRA_PRINTTIME, allFiles.listFiles().get(position).getEstimatedPrintTime()/60);
         startActivity(intent);
     }
+
+
 
     public void setActionBar(String heading){
         ActionBar actionBar = getSupportActionBar();
@@ -88,12 +101,12 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
 
 
     public void ForwardButton(MenuItem item) {
-        Intent intent = new Intent(selectFileActivity.this,moveHeadActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(selectFileActivity.this,moveHeadActivity.class);
+//        startActivity(intent);
     }
 
     public void ReverseButton(MenuItem item) {
-        Intent intent = new Intent(selectFileActivity.this,settingsActivity.class);
+        Intent intent = new Intent(selectFileActivity.this,fileChooserActivity.class);
         startActivity(intent);
     }
 
