@@ -28,17 +28,18 @@ import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
 
 public class printActivity extends AppCompatActivity {
 
+    Recognizer voice = Recognizer.getInstance();
+
+
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.print_activity);
         TextView selectedFile = findViewById(R.id.selectedFileName);
-        final Button cancelBtn = findViewById(R.id.cancelButton);
-        final Button pauseBtn = findViewById(R.id.pauseButton);
-        final Button resumeBtn = findViewById(R.id.resumeButton);
+        final Button stopBtn = findViewById(R.id.stopButton);
+
         setActionBar("Printing Activity");
-        pauseBtn.setEnabled(false);
-        cancelBtn.setEnabled(false);
-        resumeBtn.setEnabled(false);
+        Listening();
+        stopBtn.setEnabled(false);
 
         final JobCommand job = new JobCommand(MainActivity.octoPrint);
         final PrinterCommand printerState = new PrinterCommand(MainActivity.octoPrint);
@@ -60,8 +61,7 @@ public class printActivity extends AppCompatActivity {
                 {
                     print.printFile(selectedFileName);
                     printButton.setEnabled(false);
-                    pauseBtn.setEnabled(true);
-                    cancelBtn.setEnabled(true);
+                    stopBtn.setEnabled(true);
                     Toast.makeText(printActivity.this,"Job is Printing",Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -72,7 +72,7 @@ public class printActivity extends AppCompatActivity {
         });
 
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
+        stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(printerState.getCurrentState().isPrinting() || printerState.getCurrentState().isPaused())
@@ -84,50 +84,6 @@ public class printActivity extends AppCompatActivity {
                 else
                 {
                     Toast.makeText(printActivity.this,"Job is already Canceled",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-        pauseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(printerState.getCurrentState().isPrinting())
-                {
-                    job.updateJob(JobCommand.JobState.PAUSE);
-                    resumeBtn.setEnabled(true);
-                    printButton.setEnabled(false);
-                    Toast.makeText(printActivity.this,"Job is Paused",Toast.LENGTH_SHORT).show();
-                }
-                else if(printerState.getCurrentState().isPaused())
-                {
-                    Toast.makeText(printActivity.this,"Job is already Paused ",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(printActivity.this, "Invalid action", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-
-
-        resumeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(printerState.getCurrentState().isPaused())
-                {
-                    job.updateJob(JobCommand.JobState.RESUME);
-                    resumeBtn.setEnabled(false);
-                    Toast.makeText(printActivity.this,"Job is Resume ",Toast.LENGTH_SHORT).show();
-                }
-                else if(printerState.getCurrentState().isPrinting())
-                {
-                    Toast.makeText(printActivity.this,"Job is already Printing ",Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(printActivity.this,"Invalid action ",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -146,7 +102,9 @@ public class printActivity extends AppCompatActivity {
         actionBar.show();
     }
 
-
+    public void Listening() {
+        voice.initializeSpeech(this);
+    }
 
 
 
@@ -159,10 +117,12 @@ public class printActivity extends AppCompatActivity {
     public void ReverseButton(MenuItem item) {
         Intent intent = new Intent(printActivity.this,selectFileActivity.class);
         startActivity(intent);
+        voice.kill();
     }
 
     public void HomeButton(MenuItem item) {
         Intent intent = new Intent (printActivity.this,homeActivity.class);
         startActivity(intent);
+        voice.kill();
     }
 }
