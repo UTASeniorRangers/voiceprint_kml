@@ -106,6 +106,8 @@ public class FileCommand extends OctoPrintCommand {
 	 * @param filename the name of the file, assumes it is local and not on the SD card
 	 * @return if operation succeeded
 	 */
+
+
 	public boolean printFile(final String filename){
 		OctoPrintHttpRequest request = this.createRequest("local/" + filename);
 		request.setType("POST");
