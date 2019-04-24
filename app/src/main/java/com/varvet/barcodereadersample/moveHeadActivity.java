@@ -126,20 +126,19 @@ public class moveHeadActivity extends AppCompatActivity {
         voice.kill();
         Intent intent = new Intent(moveHeadActivity.this,moveHeadActivity.class);
         startActivity(intent);
-        voice.kill();
     }
 
     public void ReverseButton(MenuItem item) {
         voice.kill();
         Intent intent = new Intent(moveHeadActivity.this,selectFileActivity.class);
-        voice.kill();
         startActivity(intent);
     }
 
     public void HomeButton(MenuItem item) {
+        voice.kill();
         Intent intent = new Intent(moveHeadActivity.this, homeActivity.class);
         startActivity(intent);
-        voice.kill();
+
     }
 
     public void Listening() {
