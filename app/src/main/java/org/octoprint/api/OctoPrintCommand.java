@@ -32,4 +32,19 @@ public abstract class OctoPrintCommand {
 		
 		return request;
 	}
+
+
+	protected OctoPrintUpload createUpload(String loc) {
+
+		String urlPath = g_base;
+
+		if(loc != null && !loc.isEmpty())
+		{
+			urlPath = urlPath + "/" + loc;
+		}
+
+		OctoPrintUpload request = new OctoPrintUpload(urlPath);
+
+		return request;
+	}
 }

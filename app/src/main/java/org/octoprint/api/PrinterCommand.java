@@ -247,4 +247,11 @@ public class PrinterCommand extends OctoPrintCommand {
 			return m_command;
 		}
 	}
+
+	public boolean upload(){
+		System.out.println("in upload function");
+		OctoPrintUpload request = this.createUpload("files/sdcard");
+		request.setType("POST");
+		return g_comm.executeUpload(request);
+	}
 }

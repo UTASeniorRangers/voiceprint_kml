@@ -95,6 +95,18 @@ public class OctoPrintInstance {
 		return true;
 	}
 
+	public boolean executeUpload(OctoPrintUpload request){
+		final HttpURLConnection connection = request.createConnection(m_url,m_key);
+
+		try {
+			handleConnection(connection,204);
+		} catch(final NoContentException e) {
+			return false;
+		}
+		return true;
+	}
+
+
 	private String handleConnection(final HttpURLConnection connection, final int successStatus) {
 		final int statusCode;
 		String output;

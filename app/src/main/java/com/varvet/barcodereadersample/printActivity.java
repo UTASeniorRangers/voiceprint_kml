@@ -77,7 +77,7 @@ public class printActivity extends AppCompatActivity {
                         print.printFile(selectedFileName);
                     }
                     else {
-                        print.uploadFile(fileChooserActivity.mfileUri.getScheme());
+                      //  print.uploadFile(fileChooserActivity.mfileUri.getScheme());
                     }
 
 

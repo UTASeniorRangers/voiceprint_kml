@@ -100,27 +100,6 @@ public class FileCommand extends OctoPrintCommand {
 		return result;
 	}
 
-//    /**
-//     * Returns an object with gcodeAnalysis information on the given filename
-//     *
-//     * @param filename the name of the file, assumes it is local and not on the SD card
-//     * @return info about the file, will return null if that file does not exist
-//     */
-//    public OctoPrintFileInformation getGCODEAnalysis(final String filename){
-//        OctoPrintFileInformation result = null;	//returns null if file does not exist
-//
-//        //try and find the file
-//        JsonObject json = this.g_comm.executeQuery(this.createRequest("gcodeAnalysis/" + filename + "?recursive=true"));
-//
-//        if(json != null)
-//        {
-//            result = this.createFile(json);
-//        }
-//
-//        return result;
-//    }
-
-
 	
 	/**
 	 * This will load and start printing of the given file
@@ -138,20 +117,5 @@ public class FileCommand extends OctoPrintCommand {
 		
 		return g_comm.executeUpdate(request);
 	}
-
-    /**
-     * This will load and start printing of the given file
-     *
-     * @param filename the name of the file, assumes it is local and not on the SD card
-     * @return if operation succeeded
-     */
-    public boolean uploadFile(final String filename){
-        OctoPrintHttpRequest request = this.createRequest("local/" + filename);
-        request.setType("POST");
-
-        return g_comm.executeUpdate(request);
-    }
-
-
 	
 }
