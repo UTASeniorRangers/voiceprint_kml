@@ -171,7 +171,10 @@ public class Recognizer implements RecognitionListener {
                 initializeSpeech(this.context);
             }
             else {
-                kill();
+
+            //FIX: Potential fix for unresponsive Recognizer in activity
+
+                //kill();
             }
         }
 
