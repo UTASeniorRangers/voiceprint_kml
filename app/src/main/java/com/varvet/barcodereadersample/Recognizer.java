@@ -1,5 +1,6 @@
 package com.varvet.barcodereadersample;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class Recognizer implements RecognitionListener {
     private String LOG_TAG = "VoiceRecognitionActivity";
     private Context context;
 
-   // private ProgressBar progressBar;
+    private ProgressBar progressBar;
     private TextView output;
 
     //Instance object = new Instance();
@@ -43,7 +44,7 @@ public class Recognizer implements RecognitionListener {
     public void initializeSpeech(Context context) {
         this.context = context;
 
-        //progressBar = ((Activity)context).findViewById(R.id.progressBar);
+        progressBar = ((Activity)context).findViewById(R.id.progressBar);
         //output = ((Activity)context).findViewById(R.id.output);
 
         speech = SpeechRecognizer.createSpeechRecognizer(context);
@@ -56,11 +57,11 @@ public class Recognizer implements RecognitionListener {
 
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3); //Unneeded
 
-       // progressBar.setVisibility(View.VISIBLE);
-       // progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setIndeterminate(true);
 
         speech.startListening(recognizerIntent);
-        Toast.makeText(this.context,"speech initialization is done", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.context,"speech initialization is done", Toast.LENGTH_SHORT).show();
     }
 
     public void kill() {
@@ -74,17 +75,17 @@ public class Recognizer implements RecognitionListener {
 
     @Override
     public void onBeginningOfSpeech() {
-        Toast.makeText(this.context,"speech beginning", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this.context,"speech beginning", Toast.LENGTH_SHORT).show();
         Log.i(LOG_TAG, "onBeginningOfSpeech");
-       // progressBar.setIndeterminate(false);
-       // progressBar.setMax(10);
+        progressBar.setIndeterminate(false);
+        progressBar.setMax(10);
 
     }
 
     @Override
     public void onRmsChanged(float rmsdB) {
         Log.i(LOG_TAG, "onRmsChanged: " + rmsdB);
-       // progressBar.setProgress((int) rmsdB);
+        progressBar.setProgress((int) rmsdB);
 
     }
 
@@ -95,10 +96,10 @@ public class Recognizer implements RecognitionListener {
 
     @Override
     public void onEndOfSpeech() {
-        Toast.makeText(this.context,"speech ended", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.context,"speech ended", Toast.LENGTH_SHORT).show();
         Log.i(LOG_TAG, "onEndOfSpeech");
-     //   progressBar.setIndeterminate(false);
-       // progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setIndeterminate(false);
+        progressBar.setVisibility(View.INVISIBLE);
         speech.stopListening();
 
     }
@@ -125,10 +126,9 @@ public class Recognizer implements RecognitionListener {
         Log.i(LOG_TAG, "onResults");
         ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-
         assert matches != null;
         text += matches.get(0);
-        Toast.makeText(this.context,"text detected: "+text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.context,"text: "+text, Toast.LENGTH_SHORT).show();
 
         //TODO: Put into another method
         //TODO: [FIX] CAUSES 119 Skipped frames, The application may be doing too much work on its main thread. Put in Async task?

@@ -20,6 +20,10 @@ import android.support.v7.widget.CardView;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.octoprint.api.model.OctoPrintFileInformation;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,8 +33,16 @@ public class ListAdapterWithRecyclerView extends RecyclerView.Adapter<ListAdapte
 
     private List<OctoPrintFileInformation> ModalsList;
     private Context context;
+    private OnItemClickListener mListener;
+    //public ArrayList<ItemViewHolder> itemsArray = new ArrayList<>();
 
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public ListAdapterWithRecyclerView(Context context, List<OctoPrintFileInformation> modals) {
         this.ModalsList = modals;
@@ -49,7 +61,7 @@ public class ListAdapterWithRecyclerView extends RecyclerView.Adapter<ListAdapte
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
 
-        holder.textViewFileName.setText(this.ModalsList.get(position).getName());
+        holder.textViewFileName.setText(String.format("[%d] %s",position,this.ModalsList.get(position).getName()));
 
 
         if(Double.valueOf(this.ModalsList.get(position).getSize()/1024.0) >= 1024.0)
@@ -60,9 +72,10 @@ public class ListAdapterWithRecyclerView extends RecyclerView.Adapter<ListAdapte
             holder.textViewFileSize.setText(String.format("%.2f", this.ModalsList.get(position).getSize()/1024.0)+"KB");
         }
 
-        DateTimeFormatter fmt = ISODateTimeFormat.date();
-        String date = fmt.print(this.ModalsList.get(position).getDate());
-        holder.textViewFileUploaded.setText(date);
+        long json_date = this.ModalsList.get(position).getDate();
+        Date date = new Date(json_date*1000);
+        SimpleDateFormat sfd = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        holder.textViewFileUploaded.setText(String.format("%s", sfd.format(date)));
 
     }
 
@@ -83,6 +96,18 @@ public class ListAdapterWithRecyclerView extends RecyclerView.Adapter<ListAdapte
             textViewFileName = (TextView) view.findViewById(R.id.fileName);
             textViewFileUploaded = (TextView) view.findViewById(R.id.fileUploaded);
             textViewFileSize = (TextView) view.findViewById(R.id.fileSize);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            mListener.OnItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 

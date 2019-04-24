@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText IP_add = null;
     public static Button connBtn;
 
-    public static void setConnBtn(Button connBtn) {
-        connBtn.setClickable(false);
-    }
+//    public static void setConnBtn(Button connBtn) {
+//        connBtn.setClickable(false);
+//    }
 
     public Button resumeBtn;
     public static String savedAPI = null;
@@ -76,20 +76,11 @@ public class MainActivity extends AppCompatActivity {
         saveApiButton = (RadioButton) findViewById(R.id.saveButton);
         saveApiButton.setEnabled(false);
         saveIPButton = (RadioButton) findViewById(R.id.saveIPButton1);
-
+        saveIPButton.setEnabled(false);
+        resumeBtn.setEnabled(false);
 
 //        connBtn.addTextChangedListener(connTextWatcher);
 
-        if(IP == null && savedAPI == null)
-        {
-            resumeBtn.setClickable(false);
-            //resumeBtn.setEnabled(false);
-        }
-        else
-        {
-            resumeBtn.setClickable(true);
-            //resumeBtn.setEnabled(true);
-        }
 
         resumeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         connBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,9 +138,12 @@ public class MainActivity extends AppCompatActivity {
                         {
                             //printer.sendExtruderCommand(PrinterCommand.ToolCommand.TARGET_TEMP,0,80);
                             getDialog(R.string.dialog_title, R.string.dialog_message, R.string.CANCEL, R.string.OK);
+                            connBtn.setEnabled(false);
+                            resumeBtn.setEnabled(true);
                         } else {
                             //when input (API or IP) are invalid, display alert
                             getDialog(R.string.dialog_title, R.string.dialog_message1, R.string.OK, R.string.dummy);
+                            connBtn.setEnabled(true);
                         }
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
@@ -159,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                connBtn.setEnabled(false);
+
             }
         });
 
@@ -170,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this.getApplicationContext(), BarcodeCaptureActivity.class);
                 MainActivity.this.startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
+                saveApiButton.setChecked(false);
 
             }
         });
@@ -178,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
         saveApiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connBtn.setEnabled(true);
+                resumeBtn.setEnabled(false);
                 savedAPI = mResultTextView.getText().toString();
                 Toast.makeText(MainActivity.this, savedAPI, Toast.LENGTH_SHORT).show();
             }
@@ -185,13 +181,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         IP_add = findViewById(R.id.IP_input);
-
-        //TextWatcher is not working for saveIPButton
-        saveIPButton.addTextChangedListener(connTextWatcher);
+        IP_add.addTextChangedListener(connTextWatcher);
 
         saveIPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connBtn.setEnabled(true);
+                resumeBtn.setEnabled(false);
                 IP = IP_add.getText().toString();
                 Toast.makeText(MainActivity.this, IP, Toast.LENGTH_SHORT).show();
             }
@@ -200,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
     @Override
@@ -224,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Log.e(LOG_TAG, String.format(getString(R.string.barcode_error_format),
                         CommonStatusCodes.getStatusCodeString(resultCode)));
+                saveApiButton.setEnabled(false);
             }
         }
         else {
@@ -242,11 +238,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String apiInput = mResultTextView.getText().toString().trim();
-            String ipInput = IP_add.getText().toString().trim();
-
-            saveIPButton.setEnabled(!ipInput.isEmpty());
-            connBtn.setEnabled(!apiInput.isEmpty() && !ipInput.isEmpty());
+            saveIPButton.setEnabled(true);
+            saveIPButton.setChecked(false);
         }
 
         @Override
@@ -291,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
     //Method used to get permission
     void doPermAudio()
     {
@@ -308,5 +302,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
 //-end-
 

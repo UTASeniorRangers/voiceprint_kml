@@ -37,21 +37,22 @@ public class moveHead {
     }
 
     public static void moveUp() {
-        printer.moveOnAxis(Axis.getAxis("z"),-5);
+        printer.moveOnAxis(Axis.getAxis("z"),5);
     }
     public static void moveUp(int distance) {
-        printer.moveOnAxis(Axis.getAxis("z"),-distance);
+        printer.moveOnAxis(Axis.getAxis("z"),distance);
     }
 
     public static void moveDown() {
-        printer.moveOnAxis(Axis.getAxis("z"),5);
+        printer.moveOnAxis(Axis.getAxis("z"),-5);
     }
     public static void moveDown(int distance) {
-        printer.moveOnAxis(Axis.getAxis("z"),distance);
+        printer.moveOnAxis(Axis.getAxis("z"),-distance);
     }
 
     public static void moveHome() {
         printer.moveHome();
     }
+
 
 }

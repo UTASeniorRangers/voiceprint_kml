@@ -1,18 +1,22 @@
 package com.varvet.barcodereadersample;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.view.MenuItem;
 import android.view.View;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toolbar;
+import android.support.v7.app.ActionBar;
 
 import org.octoprint.api.OctoPrintInstance;
 
 import java.net.MalformedURLException;
+import java.util.Objects;
 
 
 public class homeActivity extends AppCompatActivity {
@@ -28,45 +32,55 @@ public class homeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+        setActionBar("Home");
 
-
-//        ip = findViewById(R.id.ip);
-//        api = findViewById(R.id.api);
-//
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-        if(MainActivity.IP != null && MainActivity.savedAPI !=null)
-        {
-//            IP = MainActivity.IP;
-//            API = MainActivity.savedAPI;
-//            ip.setText(IP);
-//            api.setText(API);
-        }
-
-
-
+        //If action bar need to be customized
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //getSupportActionBar().setCustomView(R.layout.actionbar_layout);
 
     }
 
-//    private void setSupportActionBar(Toolbar toolbar) {
-//
-//    }
+    public void setActionBar(String heading){
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+        actionBar.setTitle(heading);
+        actionBar.show();
+    }
 
 
-    // call this function in home_activity.xml like android:onClick="NextButton" for "NEXT"
-    public void NextButton(View view)
-    {
+    public void ForwardButton(MenuItem item) {
         Intent intent = new Intent(homeActivity.this,settingsActivity.class);
         startActivity(intent);
     }
 
-
-    public void BackButton(View view)
-    {
+    public void ReverseButton(MenuItem item) {
         Intent intent = new Intent(homeActivity.this,MainActivity.class);
         startActivity(intent);
     }
+
+    public void HomeButton(MenuItem item) {
+        Intent intent = new Intent (homeActivity.this,homeActivity.class);
+        startActivity(intent);
+    }
+
+
+    // call this function in home_activity.xml like android:onClick="NextButton" for "NEXT"
+//    public void NextButton(View view)
+//    {
+//        Intent intent = new Intent(homeActivity.this,settingsActivity.class);
+//        startActivity(intent);
+//    }
+//
+//
+//    public void BackButton(View view)
+//    {
+//        Intent intent = new Intent(homeActivity.this,MainActivity.class);
+//        startActivity(intent);
+//    }
 
 
 }
