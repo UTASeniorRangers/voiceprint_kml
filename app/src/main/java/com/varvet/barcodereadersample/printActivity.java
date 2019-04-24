@@ -112,6 +112,7 @@ public class printActivity extends AppCompatActivity {
     public void ForwardButton(MenuItem item) {
 //        Intent intent = new Intent(printActivity.this);
 //        startActivity(intent);
+        voice.kill();
     }
 
     public void ReverseButton(MenuItem item) {

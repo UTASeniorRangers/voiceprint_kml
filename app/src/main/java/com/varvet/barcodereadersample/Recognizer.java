@@ -187,7 +187,7 @@ public class Recognizer implements RecognitionListener {
             final PrinterCommand printerState = new PrinterCommand(MainActivity.octoPrint);
 
             String response = "";
-            
+
             Intent intent = new Intent();
 
             switch (index) {
@@ -202,6 +202,10 @@ public class Recognizer implements RecognitionListener {
                 default:
                     break;
             }
+
+            kill();
+            initializeSpeech(this.context);
+
         } else {
             Toast.makeText(this.context,"WHAT ARE YOU DOING HERE?!?!", Toast.LENGTH_LONG).show();
         }
