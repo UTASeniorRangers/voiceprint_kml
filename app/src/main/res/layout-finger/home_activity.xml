@@ -1,137 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_dark_background"
+    android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
-    <!--tools:context="com.varvet.barcodereadersample.homeActivity">-->
 
 
-    <!--<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.0"-->
-        <!--app:title="VoicePrint"-->
-        <!--app:titleTextColor="@color/colorWhite"-->
-        <!--tools:layout_editor_absoluteX="0dp" />-->
-
-    <Button
-        android:id="@+id/nextBtn"
-        style="@android:style/Widget.DeviceDefault.Button.Borderless"
-        android:layout_width="60dp"
-        android:layout_height="34dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/round_arrow_forward_ios_black_18"
-        android:onClick="NextButton"
-        android:text=""
-        android:textColor="@color/colorAccent"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="374dp"
-        android:layout_height="225dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"
-        app:srcCompat="@drawable/voiceprint" />
-
-    <Button
-        android:id="@+id/backbtn"
-        style="@android:style/Widget.DeviceDefault.Button.Borderless"
-        android:layout_width="52dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/round_arrow_back_black_18"
-        android:onClick="BackButton"
-        android:text=""
-        android:textColor="@color/colorAccent"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995" />
-
-    <TextView
-        android:id="@+id/overview"
-        android:layout_width="371dp"
-        android:layout_height="371dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/cambo"
-        android:text="@string/overview_paragraph"
-        android:textColor="@color/common_google_signin_btn_text_dark"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <FrameLayout
-        android:id="@+id/frame_container"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="600dp"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="374dp"
+                android:layout_height="225dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.476"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.022"
+                app:srcCompat="@drawable/voiceprint" />
+
+
+            <TextView
+                android:id="@+id/overview"
+                android:layout_width="371dp"
+                android:layout_height="371dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/cambo"
+                android:text="@string/overview_paragraph"
+                android:textColor="@color/common_google_signin_btn_text_dark"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <android.support.design.widget.BottomNavigationView
         style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints" />
 
 
+<!--</android.support.constraint.ConstraintLayout>-->
 
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

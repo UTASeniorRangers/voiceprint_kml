@@ -123,13 +123,13 @@ public class moveHeadActivity extends AppCompatActivity {
     }
 
     public void ForwardButton(MenuItem item) {
-        Intent intent = new Intent(moveHeadActivity.this,moveHeadActivity.class);
-        startActivity(intent);
-        voice.kill();
+        //Intent intent = new Intent(moveHeadActivity.this,moveHeadActivity.class);
+        //startActivity(intent);
+       // voice.kill();
     }
 
     public void ReverseButton(MenuItem item) {
-        Intent intent = new Intent(moveHeadActivity.this,selectFileActivity.class);
+        Intent intent = new Intent(moveHeadActivity.this,fileChooserActivity.class);
         voice.kill();
         startActivity(intent);
     }

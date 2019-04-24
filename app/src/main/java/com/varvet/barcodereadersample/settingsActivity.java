@@ -71,7 +71,7 @@ public class settingsActivity extends AppCompatActivity {
     }
 
     public void ForwardButton(MenuItem item) {
-        Intent intent = new Intent(settingsActivity.this,selectFileActivity.class);
+        Intent intent = new Intent(settingsActivity.this,fileChooserActivity.class);
         startActivity(intent);
     }
 
@@ -84,17 +84,6 @@ public class settingsActivity extends AppCompatActivity {
         Intent intent = new Intent (settingsActivity.this,homeActivity.class);
         startActivity(intent);
     }
-
-//
-//    public void NextButton(View view) {
-//        Intent intent = new Intent(settingsActivity.this,selectFileActivity.class);
-//        startActivity(intent);
-//    }
-//
-//    public void BackButton(View view) {
-//        Intent intent = new Intent(settingsActivity.this,homeActivity.class);
-//        startActivity(intent);
-//    }
 
 
 }
