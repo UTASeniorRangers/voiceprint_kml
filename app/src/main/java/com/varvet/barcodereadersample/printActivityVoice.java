@@ -2,6 +2,7 @@ package com.varvet.barcodereadersample;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import org.octoprint.api.FileCommand;
@@ -10,18 +11,24 @@ import org.octoprint.api.PrinterCommand;
 
 import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
 
-public class printActivityVoice {
+public class printActivityVoice extends AppCompatActivity {
 
 
-    public static String print(JobCommand job, PrinterCommand printerState, Intent intent) {
+
+    public String print(PrinterCommand printerState) {
+
         FileCommand print = new FileCommand(MainActivity.octoPrint);
-        final String selectedFileName = print.listFiles().get(intent.getIntExtra(EXTRA_POSITION,0)).getName();
+        System.out.println("checking"+EXTRA_POSITION);
+        printActivity obj = new printActivity();
+
+        final String selectedFileName = print.listFiles().get(getIntent().getIntExtra(EXTRA_POSITION,0)).getName();
 
         //isPrinting returns false if printer state is not printing
         if(!printerState.getCurrentState().isPrinting())
         {
-            print.printFile(selectedFileName);
-            return "Job is Printing";
+            return selectedFileName;
+//            print.printFile(selectedFileName);
+//            return "Job is Printing";
         }
         else
         {
@@ -29,7 +36,7 @@ public class printActivityVoice {
         }
     }
 
-    public static String stop(JobCommand job, PrinterCommand printerState) {
+    public String stop(JobCommand job, PrinterCommand printerState) {
         if(printerState.getCurrentState().isPrinting() || printerState.getCurrentState().isPaused())
         {
             job.updateJob(JobCommand.JobState.CANCEL);

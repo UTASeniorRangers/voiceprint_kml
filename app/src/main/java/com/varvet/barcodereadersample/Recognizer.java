@@ -179,6 +179,7 @@ public class Recognizer implements RecognitionListener {
                 kill();
             }
 
+            //TODO: Get position and file name ---------------------------------------------------
         } else if (this.context instanceof com.varvet.barcodereadersample.printActivity) {
             ArrayList<String> items = new ArrayList<String>(Arrays.asList("Print","Stop"));
             int index = GetIndex.getIndex(text,items);
@@ -188,15 +189,15 @@ public class Recognizer implements RecognitionListener {
 
             String response = "";
 
-            Intent intent = new Intent();
+            printActivityVoice obj = new printActivityVoice();
 
             switch (index) {
                 case 0:
-                    response = printActivityVoice.print(job, printerState, intent);
+                    response = obj.print(printerState);
                     Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
-                    response = printActivityVoice.stop(job, printerState);
+                    response = obj.stop(job, printerState);
                     Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
                     break;
                 default:
