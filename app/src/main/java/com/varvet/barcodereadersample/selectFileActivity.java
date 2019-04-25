@@ -89,12 +89,12 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
 
 
     public void ForwardButton(MenuItem item) {
-        Intent intent = new Intent(selectFileActivity.this,moveHeadActivity.class);
-        startActivity(intent);
+       // Intent intent = new Intent(selectFileActivity.this,moveHeadActivity.class);
+       // startActivity(intent);
     }
 
     public void ReverseButton(MenuItem item) {
-        Intent intent = new Intent(selectFileActivity.this,settingsActivity.class);
+        Intent intent = new Intent(selectFileActivity.this,fileChooserActivity.class);
         startActivity(intent);
     }
 
