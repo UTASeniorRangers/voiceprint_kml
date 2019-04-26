@@ -184,16 +184,18 @@ public class Recognizer implements RecognitionListener {
             ArrayList<String> items = new ArrayList<String>(Arrays.asList("Print","Stop"));
             int index = GetIndex.getIndex(text,items);
 
+
             final JobCommand job = new JobCommand(MainActivity.octoPrint);
             final PrinterCommand printerState = new PrinterCommand(MainActivity.octoPrint);
 
             String response = "";
 
-            printActivityVoice obj = new printActivityVoice();
+            printActivity obj = new printActivity();
 
             switch (index) {
                 case 0:
                     response = obj.print(printerState);
+
                     Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
                     break;
                 case 1:

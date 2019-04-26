@@ -1,6 +1,8 @@
 package com.varvet.barcodereadersample;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,10 +30,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import static com.varvet.barcodereadersample.selectFileActivity.PREFS_NAME;
+
 public class selectFileActivity extends AppCompatActivity implements ListAdapterWithRecyclerView.OnItemClickListener {
 
     public static final String EXTRA_FILE_NAME = "fileName";
     public static final String EXTRA_POSITION = "filePosition";
+
+    public static final String PREFS_NAME = "File";
 
     public RecyclerView recyclerView;
     ListAdapterWithRecyclerView listAdapterWithRecyclerView;
@@ -61,10 +67,7 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
         // attaching bottom sheet behaviour - hide / show on scroll
 //        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
 //        layoutParams.setBehavior(new BottomNavigationBehavior());
-
-
     }
-
 
     @Override
     public void OnItemClick(int position) {
@@ -72,6 +75,13 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
         intent.putExtra(EXTRA_FILE_NAME, allFiles.listFiles().get(position).getName());
         intent.putExtra(EXTRA_POSITION, position);
         //System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
+        editor.putString("File", allFiles.listFiles().get(position).getName());
+        editor.apply();
+
         startActivity(intent);
 
     }
