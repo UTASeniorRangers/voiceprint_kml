@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
@@ -72,15 +73,19 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
     @Override
     public void OnItemClick(int position) {
         Intent intent = new Intent(selectFileActivity.this, printActivity.class);
-        intent.putExtra(EXTRA_FILE_NAME, allFiles.listFiles().get(position).getName());
+
+        String fileName = allFiles.listFiles().get(position).getName();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("FileName",fileName);
+        editor.apply();
+
+        intent.putExtra(EXTRA_FILE_NAME, fileName);
         intent.putExtra(EXTRA_POSITION, position);
         //System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
 
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
         System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
-        editor.putString("File", allFiles.listFiles().get(position).getName());
-        editor.apply();
 
         startActivity(intent);
 

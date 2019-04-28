@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -87,8 +88,9 @@ public class printActivity extends AppCompatActivity {
 
     public String print(PrinterCommand printerState) {
         System.out.println("let me get that "+PREFS_NAME); //TODO: ERROR
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        String selectedFileName = settings.getString("File", "NO_FILE");
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String selectedFileName = preferences.getString("FileName", "NO_FILE");
 
         FileCommand print = new FileCommand(MainActivity.octoPrint);
         System.out.println("checking"+EXTRA_POSITION);
