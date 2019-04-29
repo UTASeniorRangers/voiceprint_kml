@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout3"
@@ -12,9 +12,18 @@
 
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="8dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/NavView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,11 +36,11 @@
                 android:layout_height="225dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="8dp"
                 android:scaleType="fitXY"
-                android:layout_gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.476"
@@ -45,11 +54,11 @@
                 android:id="@+id/overview"
                 android:layout_width="371dp"
                 android:layout_height="371dp"
+                android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:layout_gravity="center"
                 android:fontFamily="@font/cambo"
                 android:text="@string/overview_paragraph"
                 android:textColor="@color/common_google_signin_btn_text_dark"
@@ -67,9 +76,12 @@
 
     <android.support.design.widget.BottomNavigationView
         style="@style/AppTheme"
+        android:id="@+id/NavView"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_below="@id/scrollView"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/bottom_navigation"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,4 +90,4 @@
 
 <!--</android.support.constraint.ConstraintLayout>-->
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

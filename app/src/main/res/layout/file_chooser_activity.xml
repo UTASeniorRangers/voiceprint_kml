@@ -21,7 +21,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="76dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="30dp"
             android:text="Existing Files"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/device"
@@ -36,6 +36,7 @@
             android:layout_width="268dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="380dp"
             android:text="Upload and Print"
@@ -43,14 +44,15 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/octoprint" />
 
         <Button
             android:id="@+id/sdcard"
             android:layout_width="268dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="348dp"
             android:text="Firebase"

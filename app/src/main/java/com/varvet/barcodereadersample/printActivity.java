@@ -101,14 +101,10 @@ public class printActivity extends AppCompatActivity {
         if(!printerState.getCurrentState().isPrinting())
         {
             print.printFile(selectedFileName);
-            voice.kill();
-            Listening();
             return "Job is Printing";
         }
         else
         {
-            voice.kill();
-            Listening();
             return "Let the previous job finished";
         }
 
@@ -119,14 +115,10 @@ public class printActivity extends AppCompatActivity {
         if(printerState.getCurrentState().isPrinting() || printerState.getCurrentState().isPaused())
         {
             job.updateJob(JobCommand.JobState.CANCEL);
-            voice.kill();
-            Listening();
             return "Job was canceled";
         }
         else
         {
-            voice.kill();
-            Listening();
             return "Job is already canceled";
         }
     }

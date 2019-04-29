@@ -206,6 +206,7 @@ public class Recognizer implements RecognitionListener {
                     break;
             }
 
+            text = "";
             kill();
             initializeSpeech(this.context);
 
