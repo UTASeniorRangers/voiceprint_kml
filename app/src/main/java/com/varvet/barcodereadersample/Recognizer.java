@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import com.varvet.barcodereadersample.GetIndex;
 
+import org.octoprint.api.JobCommand;
+import org.octoprint.api.PrinterCommand;
+
 
 public class Recognizer implements RecognitionListener {
 
@@ -139,7 +142,7 @@ public class Recognizer implements RecognitionListener {
             ArrayList<String> items = new ArrayList<String>(Arrays.asList("Left","Right","Front","Back","Up","Down","Home","Quit"));
             int index = GetIndex.getIndex(text,items);
 
-            switch(index){
+            switch(index) {
                 case 0:
                     moveHead.moveLeft();
                     break;
@@ -166,6 +169,8 @@ public class Recognizer implements RecognitionListener {
             }
 
             //TODO: get the voice recognizer to re-initialize after moving the head once
+
+            //TODO: [BUG] Recognizer stops working after several seconds of no audio input
             if (index != 7) {
                 text = "";
                 initializeSpeech(this.context);
@@ -173,61 +178,41 @@ public class Recognizer implements RecognitionListener {
             else {
                 kill();
             }
+
+            //TODO: Get position and file name ---------------------------------------------------
+        } else if (this.context instanceof com.varvet.barcodereadersample.printActivity) {
+            ArrayList<String> items = new ArrayList<String>(Arrays.asList("Print","Stop"));
+            int index = GetIndex.getIndex(text,items);
+
+
+            final JobCommand job = new JobCommand(MainActivity.octoPrint);
+            final PrinterCommand printerState = new PrinterCommand(MainActivity.octoPrint);
+
+            String response = "";
+
+            printActivity obj = new printActivity();
+
+            switch (index) {
+                case 0:
+                    response = obj.print(printerState);
+
+                    Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    response = obj.stop(job, printerState);
+                    Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+
+            text = "";
+            kill();
+            initializeSpeech(this.context);
+
+        } else {
+            Toast.makeText(this.context,"WHAT ARE YOU DOING HERE?!?!", Toast.LENGTH_LONG).show();
         }
-
-
-
-
-        /* if (this.context instanceof com.rangers.voiceprint.Setters.Set_Precision) {
-//            TextView precision = ((Activity)context).findViewById(R.id.precision_text);
-            output.setText(text);
-
-            object.setPrecision(text);
-
-            //TODO: Toast message to display set parameter
-            Toast.makeText(this.context, "PRECISION SET TO: " + text, Toast.LENGTH_SHORT).show();
-
-            //Go to next activity
-            Intent set_infill = new Intent(context, com.rangers.voiceprint.Setters.Set_Infill.class);
-            context.startActivity(set_infill);
-        }
-        else if (this.context instanceof com.rangers.voiceprint.Setters.Set_Infill) {
-//            TextView infill = ((Activity)context).findViewById(R.id.infill_text);
-            output.setText(text);
-
-            object.setInfill(text);
-
-            Toast.makeText(this.context, "INFILL SET TO: " + text, Toast.LENGTH_SHORT).show();
-
-            Intent set_support = new Intent(context, Set_Support.class);
-            context.startActivity(set_support);
-        }
-        else if (this.context instanceof com.rangers.voiceprint.Setters.Set_Support) {
-//            TextView infill = ((Activity)context).findViewById(R.id.infill_text);
-            output.setText(text);
-
-            object.setSupport(text);
-
-            Toast.makeText(this.context, "SUPPORT SET TO: " + text, Toast.LENGTH_SHORT).show();
-
-            Intent set_raft = new Intent(context, Set_Raft.class);
-            context.startActivity(set_raft);
-        }
-        else if (this.context instanceof com.rangers.voiceprint.Setters.Set_Raft) {
-//            TextView infill = ((Activity)context).findViewById(R.id.infill_text);
-            output.setText(text);
-
-            object.setRaft(text);
-
-            Toast.makeText(this.context, "RAFT SET TO: " + text, Toast.LENGTH_SHORT).show();
-
-            Intent confirm = new Intent(context, Confirm.class);
-            confirm.putExtra("Instance", object);
-            context.startActivity(confirm);
-        }
-        else {
-            Log.e("ON RESULT", "CONTEXT NOT FOUND");
-        } */
 
     }
 

@@ -1,8 +1,11 @@
 package com.varvet.barcodereadersample;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
@@ -28,10 +31,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import static com.varvet.barcodereadersample.selectFileActivity.PREFS_NAME;
+
 public class selectFileActivity extends AppCompatActivity implements ListAdapterWithRecyclerView.OnItemClickListener {
 
     public static final String EXTRA_FILE_NAME = "fileName";
     public static final String EXTRA_POSITION = "filePosition";
+
+    public static final String PREFS_NAME = "File";
 
     public RecyclerView recyclerView;
     ListAdapterWithRecyclerView listAdapterWithRecyclerView;
@@ -61,18 +68,29 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
         // attaching bottom sheet behaviour - hide / show on scroll
 //        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
 //        layoutParams.setBehavior(new BottomNavigationBehavior());
-
-
     }
-
 
     @Override
     public void OnItemClick(int position) {
         Intent intent = new Intent(selectFileActivity.this, printActivity.class);
-        intent.putExtra(EXTRA_FILE_NAME, allFiles.listFiles().get(position).getName());
+
+        String fileName = allFiles.listFiles().get(position).getName();
+
+        printData.setFileName(fileName);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("FileName",fileName);
+        editor.apply();
+
+        intent.putExtra(EXTRA_FILE_NAME, fileName);
         intent.putExtra(EXTRA_POSITION, position);
         //System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
+
+        System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
+
         startActivity(intent);
+
     }
 
     public void setActionBar(String heading){
