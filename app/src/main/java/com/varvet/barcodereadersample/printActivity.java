@@ -89,10 +89,6 @@ public class printActivity extends AppCompatActivity {
     public String print(PrinterCommand printerState) {
         System.out.println("let me get that "+PREFS_NAME); //TODO: ERROR
 
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        String selectedFileName = preferences.getString("FileName", "NO_FILE");
-
-//        String selectedFileName = print.listFiles().get(getIntent().getIntExtra(EXTRA_POSITION,0)).getName();
         String selectedFileName = printData.getFileName();
         FileCommand print = new FileCommand(MainActivity.octoPrint);
         System.out.println("checking"+EXTRA_POSITION);
