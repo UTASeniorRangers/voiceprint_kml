@@ -25,7 +25,7 @@ import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
 public class printActivity extends AppCompatActivity {
 
     Recognizer voice = Recognizer.getInstance();
-
+    FileCommand print = new FileCommand(MainActivity.octoPrint);
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.print_activity);
@@ -49,7 +49,7 @@ public class printActivity extends AppCompatActivity {
         printButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FileCommand print = new FileCommand(MainActivity.octoPrint);
+               // FileCommand print = new FileCommand(MainActivity.octoPrint);
                 final String selectedFileName = print.listFiles().get(getIntent().getIntExtra(EXTRA_POSITION,0)).getName();
 
                 //isPrinting returns false if printer state is not printing
@@ -89,9 +89,11 @@ public class printActivity extends AppCompatActivity {
     public String print(PrinterCommand printerState) {
         System.out.println("let me get that "+PREFS_NAME); //TODO: ERROR
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String selectedFileName = preferences.getString("FileName", "NO_FILE");
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        String selectedFileName = preferences.getString("FileName", "NO_FILE");
 
+//        String selectedFileName = print.listFiles().get(getIntent().getIntExtra(EXTRA_POSITION,0)).getName();
+        String selectedFileName = printData.getFileName();
         FileCommand print = new FileCommand(MainActivity.octoPrint);
         System.out.println("checking"+EXTRA_POSITION);
 
@@ -99,22 +101,32 @@ public class printActivity extends AppCompatActivity {
         if(!printerState.getCurrentState().isPrinting())
         {
             print.printFile(selectedFileName);
+            voice.kill();
+            Listening();
             return "Job is Printing";
         }
         else
         {
+            voice.kill();
+            Listening();
             return "Let the previous job finished";
         }
+
+
     }
 
     public String stop(JobCommand job, PrinterCommand printerState) {
         if(printerState.getCurrentState().isPrinting() || printerState.getCurrentState().isPaused())
         {
             job.updateJob(JobCommand.JobState.CANCEL);
+            voice.kill();
+            Listening();
             return "Job was canceled";
         }
         else
         {
+            voice.kill();
+            Listening();
             return "Job is already canceled";
         }
     }

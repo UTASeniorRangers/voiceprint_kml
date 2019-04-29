@@ -76,6 +76,8 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
 
         String fileName = allFiles.listFiles().get(position).getName();
 
+        printData.setFileName(fileName);
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("FileName",fileName);
