@@ -22,8 +22,8 @@ public class GetIndex {
     public static int getIndex(String target) {
         for (int i = 0; i < items.size(); i++)
             if (items.get(i).toLowerCase().contains(target.toLowerCase()) || target.toLowerCase().contains(items.get(i).toLowerCase()))
-                return i; //Return the index that contains the found text
-        return -1; //Text not found, indicate failure to find
+                return i;
+        return -1;
     }
 
     public static int getIndex(String target, ArrayList<String> source) {
