@@ -49,6 +49,13 @@ public class fileChooserActivity extends AppCompatActivity {
             }
         });
 
+        mSDcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(fileChooserActivity.this, Firebase_Activity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void openDevice(){

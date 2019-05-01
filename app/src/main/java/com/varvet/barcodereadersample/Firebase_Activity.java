@@ -87,13 +87,16 @@ public class Firebase_Activity extends Activity {
         storageReference = firebaseStorage.getInstance().getReference();
         int num=Integer.parseInt(f_name.getText().toString());
         String [] list_fn = {"CFDMP_F1", "CFDMP_Tiny_Tester", "MMD_golf_ball", "MMD_Space_Shuttle","MMD_Yoshi", "pyramid", "UTA_coaster" };
-        String name = "";
-        for (int i = 0; i < list_fn.length; i++) {
+        String name;
+
+        name = list_fn[num];
+
+        /*for (int i = 0; i < list_fn.length; i++) {
             if (num == i) {
                 name = list_fn[i];
                 break;
             }
-        }
+        }*/
         final String name1 = name;
             ref = storageReference.child(name + ".gcode");
             ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
