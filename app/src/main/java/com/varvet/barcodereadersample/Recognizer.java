@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_FILE_NAME;
+import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +35,8 @@ public class Recognizer implements RecognitionListener {
 
     private ProgressBar progressBar;
     private TextView output;
+    private static ArrayList<String> numbers = new ArrayList<String>(Arrays.asList("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"));
+    private ArrayList<String> items;
 
     //Instance object = new Instance();
 
@@ -131,7 +135,7 @@ public class Recognizer implements RecognitionListener {
 
         assert matches != null;
         text += matches.get(0);
-        Toast.makeText(this.context,"text: "+text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.context, "text: " + text, Toast.LENGTH_SHORT).show();
 
         //TODO: Put into another method
         //TODO: [FIX] CAUSES 119 Skipped frames, The application may be doing too much work on its main thread. Put in Async task?
@@ -139,10 +143,10 @@ public class Recognizer implements RecognitionListener {
 
         if (this.context instanceof com.varvet.barcodereadersample.moveHeadActivity) {
 
-            ArrayList<String> items = new ArrayList<String>(Arrays.asList("Left","Right","Front","Back","Up","Down","Home","Quit"));
-            int index = GetIndex.getIndex(text,items);
+            ArrayList<String> items = new ArrayList<String>(Arrays.asList("Left", "Right", "Front", "Back", "Up", "Down", "Home", "Quit"));
+            int index = GetIndex.getIndex(text, items);
 
-            switch(index) {
+            switch (index) {
                 case 0:
                     moveHead.moveLeft();
                     break;
@@ -174,15 +178,15 @@ public class Recognizer implements RecognitionListener {
             if (index != 7) {
                 text = "";
                 initializeSpeech(this.context);
-            }
-            else {
+            } else {
                 kill();
             }
 
             //TODO: Get position and file name ---------------------------------------------------
-        } else if (this.context instanceof com.varvet.barcodereadersample.printActivity) {
-            ArrayList<String> items = new ArrayList<String>(Arrays.asList("Print","Stop"));
-            int index = GetIndex.getIndex(text,items);
+        }
+        else if (this.context instanceof com.varvet.barcodereadersample.printActivity) {
+            ArrayList<String> items = new ArrayList<String>(Arrays.asList("Print", "Stop"));
+            int index = GetIndex.getIndex(text, items);
 
 
             final JobCommand job = new JobCommand(MainActivity.octoPrint);
@@ -196,11 +200,11 @@ public class Recognizer implements RecognitionListener {
                 case 0:
                     response = obj.print(printerState);
 
-                    Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.context, response, Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
                     response = obj.stop(job, printerState);
-                    Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.context, response, Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
@@ -210,7 +214,33 @@ public class Recognizer implements RecognitionListener {
             kill();
             initializeSpeech(this.context);
 
-        } else {
+        }
+        else if (this.context instanceof com.varvet.barcodereadersample.selectFileActivity) {
+
+            printData.setFileName("");
+            items = GetIndex.getItems();
+            int index = GetIndex.getIndex(text, new ArrayList<String>(Arrays.asList("Number")));
+            if (index == 0) {
+                index = GetIndex.getIndex(text, numbers);
+                if (index >= 0)
+                    printData.setFileName(items.get(index));
+            } else {
+                index = GetIndex.getIndex(text);
+                if (index >= 0)
+                    printData.setFileName(items.get(index));
+            }
+            text = "";
+            kill();
+            if (printData.getFileName() == "")
+                initializeSpeech(this.context);
+            else {
+                Intent intent = new Intent(this.context, printActivity.class);
+                intent.putExtra(EXTRA_FILE_NAME, printData.getFileName());
+                intent.putExtra(EXTRA_POSITION, index);
+                context.startActivity(intent);
+            }
+        }
+        else {
             Toast.makeText(this.context,"WHAT ARE YOU DOING HERE?!?!", Toast.LENGTH_LONG).show();
         }
 

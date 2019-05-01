@@ -24,6 +24,7 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import com.varvet.barcodereadersample.printActivity;
 import org.octoprint.api.FileCommand;
 import org.octoprint.api.model.OctoPrintFileInformation;
+import com.varvet.barcodereadersample.GetIndex;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +42,7 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
     public static final String PREFS_NAME = "File";
 
     public RecyclerView recyclerView;
+    Recognizer voice = Recognizer.getInstance();
     ListAdapterWithRecyclerView listAdapterWithRecyclerView;
     static FileCommand allFiles = new FileCommand(MainActivity.octoPrint);
     static List<OctoPrintFileInformation> Files = allFiles.listFiles();
@@ -52,9 +54,16 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
         setContentView(R.layout.select_activity_recycler_view);
         setActionBar("OctoPrint Storage");
 
-
         recyclerView = (RecyclerView) findViewById(R.id.recycleListView);
         listAdapterWithRecyclerView = new ListAdapterWithRecyclerView(this, Files);
+
+        GetIndex.clearItems();
+        for(int i = 0; i < Files.size(); i++)
+        {
+            GetIndex.addItem(Files.get(i).getName());
+        }
+
+        voice.initializeSpeech(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -112,11 +121,13 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
 
     public void ReverseButton(MenuItem item) {
         Intent intent = new Intent(selectFileActivity.this,fileChooserActivity.class);
+        voice.kill();
         startActivity(intent);
     }
 
     public void HomeButton(MenuItem item) {
         Intent intent = new Intent (selectFileActivity.this,homeActivity.class);
+        voice.kill();
         startActivity(intent);
     }
 
