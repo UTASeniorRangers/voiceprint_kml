@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "445561880951",
+    "firebase_url": "https://voiceprintkml-master-7f29e.firebaseio.com",
+    "project_id": "voiceprintkml-master-7f29e",
+    "storage_bucket": "voiceprintkml-master-7f29e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445561880951:android:4b525e4ef7ffcf4d",
+        "android_client_info": {
+          "package_name": "com.varvet.barcodereadersample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445561880951-g8jo0668510rvjvao3t1i2t4v43k7rgk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.varvet.barcodereadersample",
+            "certificate_hash": "d9f2827d754a30c208f7ec449b5ffe7e20d17ab6"
+          }
+        },
+        {
+          "client_id": "445561880951-mspl3il81kcqa7d18mctih0k2ofaos93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHxna_RiRQKuyqQxTph4hSR09DS1WrbVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445561880951-mspl3il81kcqa7d18mctih0k2ofaos93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
