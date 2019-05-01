@@ -1,38 +1,26 @@
 package com.varvet.barcodereadersample;
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_FILE_NAME;
+import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.varvet.barcodereadersample.GetIndex;
 
 import org.octoprint.api.JobCommand;
 import org.octoprint.api.PrinterCommand;
-import static android.content.Context.DOWNLOAD_SERVICE;
-import static android.os.Environment.DIRECTORY_DOWNLOADS;
-
-
 
 
 public class Recognizer implements RecognitionListener {
@@ -47,13 +35,9 @@ public class Recognizer implements RecognitionListener {
 
     private ProgressBar progressBar;
     private TextView output;
+    private static ArrayList<String> numbers = new ArrayList<String>(Arrays.asList("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"));
+    private ArrayList<String> items;
 
-    //FirebaseStorage firebaseStorage;
-    //StorageReference storageReference;
-    //StorageReference ref;
-    //FirebaseAuth mAuth;
-    //FirebaseUser user;
-    //DownloadManager downloadManager;
     //Instance object = new Instance();
 
     public static synchronized Recognizer getInstance() {
@@ -77,6 +61,7 @@ public class Recognizer implements RecognitionListener {
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,context.getPackageName());
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,context.getPackageName());
+
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3); //Unneeded
 
         progressBar.setVisibility(View.VISIBLE);
@@ -150,7 +135,7 @@ public class Recognizer implements RecognitionListener {
 
         assert matches != null;
         text += matches.get(0);
-        Toast.makeText(this.context,"text: "+text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.context, "text: " + text, Toast.LENGTH_SHORT).show();
 
         //TODO: Put into another method
         //TODO: [FIX] CAUSES 119 Skipped frames, The application may be doing too much work on its main thread. Put in Async task?
@@ -197,73 +182,11 @@ public class Recognizer implements RecognitionListener {
                 kill();
             }
 
-        }
-        /*
-        else if (this.context instanceof com.varvet.barcodereadersample.Firebase_Activity) {
-
-                //TODO: code here to check for filename and save it to printData class
-                ArrayList<String> items = new ArrayList<String>(Arrays.asList("CFDMP_F1", "CFDMP_Tiny_Tester", "MMD_golf_ball", "MMD_Space_Shuttle", "MMD_Yoshi", "pyramid", "UTA_coaster"));
-                ArrayList<String> numbers = new ArrayList<String>(Arrays.asList("1", "0", "2", "3", "4", "5", "6"));
-                mAuth = FirebaseAuth.getInstance();
-                user = mAuth.getCurrentUser();
-                //Firebase_Activity c = new Firebase_Activity();
-                download c = new download();
-
-            int index = GetIndex.getIndex(text, numbers);
-                switch (index) {
-                    case 0:
-
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null) {
-                            //new Firebase_Activity().download(items.get(0));
-                            //kill();
-                            c.down_load("CFDMP_F1");
-                            break;
-
-                        }
-
-                    case 1:
-                        c.down_load(items.get(1));
-                        //kill();
-                        break;
-                    case 2:
-                        c.down_load(items.get(2));
-                        //kill();
-                        break;
-                    case 3:
-                        c.down_load(items.get(3));
-                        //kill();
-                    case 4:
-                        c.down_load(items.get(4));
-                        //kill();
-                        break;
-                    case 5:
-                        c.down_load(items.get(5));
-                        //kill();
-                        break;
-                    case 6:
-                        c.down_load(items.get(6));
-                        //kill();
-                        break;
-                    default:
-                        break;
-                }
-                if (index != 7) {
-                    text = "";
-                    initializeSpeech(this.context);
-                } else {
-                    kill();
-                }
-
-
-
             //TODO: Get position and file name ---------------------------------------------------
         }
-        */
-
         else if (this.context instanceof com.varvet.barcodereadersample.printActivity) {
-            ArrayList<String> items = new ArrayList<String>(Arrays.asList("Print","Stop"));
-            int index = GetIndex.getIndex(text,items);
+            ArrayList<String> items = new ArrayList<String>(Arrays.asList("Print", "Stop"));
+            int index = GetIndex.getIndex(text, items);
 
 
             final JobCommand job = new JobCommand(MainActivity.octoPrint);
@@ -277,11 +200,11 @@ public class Recognizer implements RecognitionListener {
                 case 0:
                     response = obj.print(printerState);
 
-                    Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.context, response, Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
                     response = obj.stop(job, printerState);
-                    Toast.makeText(this.context,response,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.context, response, Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
@@ -291,7 +214,33 @@ public class Recognizer implements RecognitionListener {
             kill();
             initializeSpeech(this.context);
 
-        } else {
+        }
+        else if (this.context instanceof com.varvet.barcodereadersample.selectFileActivity) {
+
+            printData.setFileName("");
+            items = GetIndex.getItems();
+            int index = GetIndex.getIndex(text, new ArrayList<String>(Arrays.asList("Number")));
+            if (index == 0) {
+                index = GetIndex.getIndex(text, numbers);
+                if (index >= 0)
+                    printData.setFileName(items.get(index));
+            } else {
+                index = GetIndex.getIndex(text);
+                if (index >= 0)
+                    printData.setFileName(items.get(index));
+            }
+            text = "";
+            kill();
+            if (printData.getFileName() == "")
+                initializeSpeech(this.context);
+            else {
+                Intent intent = new Intent(this.context, printActivity.class);
+                intent.putExtra(EXTRA_FILE_NAME, printData.getFileName());
+                intent.putExtra(EXTRA_POSITION, index);
+                context.startActivity(intent);
+            }
+        }
+        else {
             Toast.makeText(this.context,"WHAT ARE YOU DOING HERE?!?!", Toast.LENGTH_LONG).show();
         }
 

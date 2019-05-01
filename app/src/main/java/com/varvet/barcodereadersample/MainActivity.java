@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout layout;
     private TextInputEditText IP_add = null;
     public static Button connBtn;
-    public Button down_load;
-
 
 //    public static void setConnBtn(Button connBtn) {
 //        connBtn.setClickable(false);
@@ -80,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         saveIPButton = (RadioButton) findViewById(R.id.saveIPButton1);
         saveIPButton.setEnabled(false);
         resumeBtn.setEnabled(false);
+
+//        connBtn.addTextChangedListener(connTextWatcher);
+
 
         resumeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

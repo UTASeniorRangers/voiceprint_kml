@@ -9,10 +9,13 @@ import android.provider.OpenableColumns;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.net.URI;
 
 public class fileChooserActivity extends AppCompatActivity {
 
@@ -45,14 +48,6 @@ public class fileChooserActivity extends AppCompatActivity {
                 openDevice();
             }
         });
-
-         mSDcard.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent intent = new Intent(fileChooserActivity.this, Firebase_Activity.class);
-                 startActivity(intent);
-             }
-         });
 
     }
 
