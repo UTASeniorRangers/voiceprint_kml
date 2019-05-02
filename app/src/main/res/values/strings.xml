@@ -35,6 +35,22 @@
     <string name="textview_ip"><p>\tEnter the IP address below that OctoPrint is assigned.\n\n
         (Hint: see in the URL bar of OctoPrint)</p></string>
 
+    <!--VoicePrint Help Button Paragraph-->
+    <string name="help_info">\n\n
+        1.	To get the API key, open the app and tap “QR Scanner.” Tap “Save API key.”
+        Type in the IP address of your printer displayed in the address bar of the OctoPrint browser.
+        Tap “Save IP.” Tap “Connect.” Tap “OK.” \n\n
+        2.	On the Upload File Screen, tap on “EXISTING FILES.” The OctoPrint Storage Screen will be displayed.
+        It has a list of files that are on OctoPrint Server. \n\n\tTo select a file, \n\t\t\t(1) tap on the file, \n\t\t\t(2) say the
+        number of the file, or \n\t\t\t(3) speak any word in the filename. \n\n
+        3.	The Printing Activity Screen will be displayed. \n\n\tTo print the selected file, \n\t\t\t(1) tap “PRINT” or \n\t\t\t(2) say,
+        “PRINT.” \n\n\tTo stop the print job, \n\t\t\t(1) tap “STOP” or \n\t\t\t(2) say “STOP.” \n\n
+        4.	To access the MoveHead Activity, tap “next” on the Upload File Screen until the Move Printer Arm Screen is displayed. \n\n
+        5.	On the Move Print Arm Screen, tap the left/right/front/back/up/down button to move the print head left/right/front/back/up/down.
+        Or, say “move left,” “move right,” “move front,” “move back,” “move up,” or “move down” to move the print head in the specified direction.
+        To return the print head to its original position, tap the home button or say “home.” \n\n
+
+    </string>
 
 
     <!-- Strings related to barcode scanner -->

@@ -34,10 +34,15 @@
         <activity android:name=".printActivity"/>
         <activity android:name=".fileChooserActivity"/>
         <activity android:name=".Firebase_Activity"/>
+        <activity android:name=".helpActivity"/>
 
         <activity
             android:name=".barcode.BarcodeCaptureActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
 
     </application>

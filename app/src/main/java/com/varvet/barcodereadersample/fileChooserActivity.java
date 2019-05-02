@@ -9,13 +9,10 @@ import android.provider.OpenableColumns;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.net.URI;
 
 public class fileChooserActivity extends AppCompatActivity {
 
@@ -28,11 +25,12 @@ public class fileChooserActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.file_chooser_activity);
-        setActionBar("UPLOAD FILE");
+        setActionBar("Choose a File");
 
         final Button mOctoprintButton = findViewById(R.id.octoprint);
-        final Button mDevice = findViewById(R.id.device);
-        final Button mSDcard = findViewById(R.id.sdcard);
+       // final Button mDevice = findViewById(R.id.upload_print);
+        final Button mFirebase = findViewById(R.id.firebase);
+        final Button mHelp = findViewById(R.id.help);
 
         mOctoprintButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,20 +40,31 @@ public class fileChooserActivity extends AppCompatActivity {
             }
         });
 
-        mDevice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDevice();
-            }
-        });
+//        mDevice.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openDevice();
+//            }
+//        });
 
-        mSDcard.setOnClickListener(new View.OnClickListener() {
+        mFirebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(fileChooserActivity.this, Firebase_Activity.class);
                 startActivity(intent);
             }
         });
+
+        mHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(fileChooserActivity.this,helpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     private void openDevice(){
