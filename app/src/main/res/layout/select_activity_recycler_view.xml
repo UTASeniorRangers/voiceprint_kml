@@ -13,6 +13,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/cardview_dark_background"
         android:layout_marginBottom="8dp"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/recycleListView"

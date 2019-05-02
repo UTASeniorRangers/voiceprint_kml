@@ -24,13 +24,19 @@ import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
 
 public class printActivity extends AppCompatActivity {
 
+
+    final Button stopBtn = findViewById(R.id.stopButton);
+    final Button printButton = findViewById(R.id.printButton);
     Recognizer voice = Recognizer.getInstance();
     FileCommand print = new FileCommand(MainActivity.octoPrint);
+
+
+
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.print_activity);
         TextView selectedFile = findViewById(R.id.selectedFileName);
-        final Button stopBtn = findViewById(R.id.stopButton);
+
 
         setActionBar("Printing Activity");
         stopBtn.setEnabled(false);
@@ -38,12 +44,11 @@ public class printActivity extends AppCompatActivity {
         final JobCommand job = new JobCommand(MainActivity.octoPrint);
         final PrinterCommand printerState = new PrinterCommand(MainActivity.octoPrint);
 
-        final Button printButton = findViewById(R.id.printButton);
         printButton.setEnabled(true);
 
         selectedFile.setText(String.format("Selected: [%s]",getIntent().getStringExtra(EXTRA_FILE_NAME)));
 
-
+        // start listening for user command
         Listening();
 
         printButton.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +106,7 @@ public class printActivity extends AppCompatActivity {
         if(!printerState.getCurrentState().isPrinting())
         {
             print.printFile(selectedFileName);
+            stopBtn.setEnabled(true);
             return "Job is Printing";
         }
         else
@@ -115,6 +121,7 @@ public class printActivity extends AppCompatActivity {
         if(printerState.getCurrentState().isPrinting() || printerState.getCurrentState().isPaused())
         {
             job.updateJob(JobCommand.JobState.CANCEL);
+            printButton.setEnabled(true);
             return "Job was canceled";
         }
         else
