@@ -38,6 +38,7 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
 
     public static final String EXTRA_FILE_NAME = "fileName";
     public static final String EXTRA_POSITION = "filePosition";
+    public static final String EXTRA_PRINTTIME = "printTime";
 
     public static final String PREFS_NAME = "File";
 
@@ -46,6 +47,7 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
     ListAdapterWithRecyclerView listAdapterWithRecyclerView;
     static FileCommand allFiles = new FileCommand(MainActivity.octoPrint);
     static List<OctoPrintFileInformation> Files = allFiles.listFiles();
+    int globalPosition;
 
 
     @Override
@@ -70,33 +72,28 @@ public class selectFileActivity extends AppCompatActivity implements ListAdapter
         recyclerView.setAdapter(listAdapterWithRecyclerView);
 
         listAdapterWithRecyclerView.setOnItemClickListener(selectFileActivity.this);
-//
-//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        // attaching bottom sheet behaviour - hide / show on scroll
-//        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
-//        layoutParams.setBehavior(new BottomNavigationBehavior());
     }
 
     @Override
     public void OnItemClick(int position) {
         Intent intent = new Intent(selectFileActivity.this, printActivity.class);
+        globalPosition =position;
 
         String fileName = allFiles.listFiles().get(position).getName();
 
         printData.setFileName(fileName);
+       // printData.setPrintTime(printTime);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("FileName",fileName);
-        editor.apply();
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putString("FileName",fileName);
+//        editor.apply();
 
         intent.putExtra(EXTRA_FILE_NAME, fileName);
         intent.putExtra(EXTRA_POSITION, position);
-        //System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
-
-        System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getName());
+        intent.putExtra(EXTRA_PRINTTIME, allFiles.listFiles().get(position).getEstimatedPrintTime()/60);
+       // System.out.println("Heyyyyyyyy thats working ......."+allFiles.listFiles().get(position).getEstimatedPrintTime()/60);
 
         startActivity(intent);
 

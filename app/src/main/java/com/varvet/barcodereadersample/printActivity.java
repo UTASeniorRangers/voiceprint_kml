@@ -18,18 +18,19 @@ import org.octoprint.api.FileCommand;
 import org.octoprint.api.JobCommand;
 import org.octoprint.api.PrinterCommand;
 
+import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_PRINTTIME;
 import static com.varvet.barcodereadersample.selectFileActivity.PREFS_NAME;
 import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_FILE_NAME;
 import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
 
+
 public class printActivity extends AppCompatActivity {
 
 
-    final Button stopBtn = findViewById(R.id.stopButton);
-    final Button printButton = findViewById(R.id.printButton);
     Recognizer voice = Recognizer.getInstance();
     FileCommand print = new FileCommand(MainActivity.octoPrint);
-
+   // Button stpBtn = findViewById(R.id.stopButton);
+   // Button prtBtn = findViewById(R.id.printButton);
 
 
     protected void onCreate(Bundle savedInstanceState){
@@ -37,8 +38,11 @@ public class printActivity extends AppCompatActivity {
         setContentView(R.layout.print_activity);
         TextView selectedFile = findViewById(R.id.selectedFileName);
 
+        final TextView estimatedPrintTime = findViewById(R.id.printTime);
+        final Button stopBtn = findViewById(R.id.stopButton);
+        final Button printButton = findViewById(R.id.printButton);
 
-        setActionBar("Printing Activity");
+        setActionBar("Print Activity");
         stopBtn.setEnabled(false);
 
         final JobCommand job = new JobCommand(MainActivity.octoPrint);
@@ -47,6 +51,8 @@ public class printActivity extends AppCompatActivity {
         printButton.setEnabled(true);
 
         selectedFile.setText(String.format("Selected: [%s]",getIntent().getStringExtra(EXTRA_FILE_NAME)));
+
+        estimatedPrintTime.setText(String.format("Duration: %.2f ",getIntent().getFloatExtra(EXTRA_PRINTTIME,0))+"minutes");
 
         // start listening for user command
         Listening();
@@ -94,19 +100,16 @@ public class printActivity extends AppCompatActivity {
     public String print(PrinterCommand printerState) {
         System.out.println("let me get that "+PREFS_NAME); //TODO: ERROR
 
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        String selectedFileName = preferences.getString("FileName", "NO_FILE");
 
-//        String selectedFileName = print.listFiles().get(getIntent().getIntExtra(EXTRA_POSITION,0)).getName();
         String selectedFileName = printData.getFileName();
         FileCommand print = new FileCommand(MainActivity.octoPrint);
-        System.out.println("checking"+EXTRA_POSITION);
+      //  System.out.println("checking"+EXTRA_POSITION);
 
         //isPrinting returns false if printer state is not printing
         if(!printerState.getCurrentState().isPrinting())
         {
             print.printFile(selectedFileName);
-            stopBtn.setEnabled(true);
+            //stpBtn.setEnabled(true);
             return "Job is Printing";
         }
         else
@@ -121,7 +124,7 @@ public class printActivity extends AppCompatActivity {
         if(printerState.getCurrentState().isPrinting() || printerState.getCurrentState().isPaused())
         {
             job.updateJob(JobCommand.JobState.CANCEL);
-            printButton.setEnabled(true);
+            //prtBtn.setEnabled(true);
             return "Job was canceled";
         }
         else
@@ -152,7 +155,7 @@ public class printActivity extends AppCompatActivity {
     }
 
     public void ReverseButton(MenuItem item) {
-        Intent intent = new Intent(printActivity.this,selectFileActivity.class);
+        Intent intent = new Intent(printActivity.this,fileChooserActivity.class);
         startActivity(intent);
         voice.kill();
     }

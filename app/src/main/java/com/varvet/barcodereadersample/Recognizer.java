@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_FILE_NAME;
 import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_POSITION;
+import static com.varvet.barcodereadersample.selectFileActivity.EXTRA_PRINTTIME;
+import static com.varvet.barcodereadersample.selectFileActivity.allFiles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -220,14 +222,22 @@ public class Recognizer implements RecognitionListener {
             printData.setFileName("");
             items = GetIndex.getItems();
             int index = GetIndex.getIndex(text, new ArrayList<String>(Arrays.asList("Number")));
+
             if (index == 0) {
                 index = GetIndex.getIndex(text, numbers);
-                if (index >= 0)
+                if (index >= 0) {
                     printData.setFileName(items.get(index));
+                    float printTime = allFiles.listFiles().get(index).getEstimatedPrintTime() / 60;
+                    printData.setPrintTime(printTime);
+                }
             } else {
+
                 index = GetIndex.getIndex(text);
-                if (index >= 0)
+                if (index >= 0) {
                     printData.setFileName(items.get(index));
+                    float printTime = allFiles.listFiles().get(index).getEstimatedPrintTime() / 60;
+                    printData.setPrintTime(printTime);
+                }
             }
             text = "";
             kill();
@@ -237,6 +247,7 @@ public class Recognizer implements RecognitionListener {
                 Intent intent = new Intent(this.context, printActivity.class);
                 intent.putExtra(EXTRA_FILE_NAME, printData.getFileName());
                 intent.putExtra(EXTRA_POSITION, index);
+                intent.putExtra(EXTRA_PRINTTIME, printData.getPrintTime());
                 context.startActivity(intent);
             }
         }

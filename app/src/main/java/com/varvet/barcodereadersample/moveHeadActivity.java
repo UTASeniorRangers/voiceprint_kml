@@ -130,7 +130,7 @@ public class moveHeadActivity extends AppCompatActivity {
 
     public void ReverseButton(MenuItem item) {
         voice.kill();
-        Intent intent = new Intent(moveHeadActivity.this,selectFileActivity.class);
+        Intent intent = new Intent(moveHeadActivity.this,fileChooserActivity.class);
         startActivity(intent);
     }
 

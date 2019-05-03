@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -8,44 +9,49 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/cardview_dark_background">
 
-        <ScrollView
-            android:id="@+id/helpText"
-            style="@android:style/Widget.DeviceDefault.ScrollView"
-            android:layout_width="395dp"
-            android:layout_height="680dp"
-            android:fillViewport="true"
-            android:scrollbars="vertical"
-            android:layout_gravity="center">
+    <ScrollView
+        android:id="@+id/helpText"
+        style="@android:style/Widget.DeviceDefault.ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_gravity="clip_vertical"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent">
 
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_vertical"
-                android:background="@color/cardview_dark_background"
-                android:fontFamily="@font/headland_one"
-                android:text="@string/help_info"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/cardview_light_background"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:typeface="sans" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="clip_vertical"
+            android:background="@color/cardview_dark_background"
+            android:fontFamily="@font/headland_one"
+            android:text="@string/help_info"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
 
-        </ScrollView>
+    </ScrollView>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="57dp"
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/recycleListView"
-        app:layout_constraintTop_toBottomOf="@+id/recycleListView"
-        app:menu="@menu/bottom_navigation" />
+        app:layout_constraintTop_toBottomOf="@id/helpText"
+        app:menu="@menu/bottom_navigation"
+        tools:layout_editor_absoluteX="-1dp" />
 
 
 
-    </LinearLayout>
+
+</LinearLayout>
 
